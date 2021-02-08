@@ -31,6 +31,7 @@
 #include "spi.h"
 #include "uart.h"
 #include "utils.h"
+#include "flashdata.h"
 
 #define DELAY1 1000//Determines the duration of delay1//
 #define DELAY2 2000//Determines the duration of delay2//
@@ -61,8 +62,9 @@ void main()
 {
 	int write_address = 0x00b00004;  // read/write from/to this address
 	int read_address  = 0x00b00004;  // read/write from/to this address
-	int data = 0xDEADBEEF; //32 bits of data can be written at a time
+	int data = write_data; //32 bits of data can be written at a time
 	uint16_t length = 11;
+	int i;
 
 	configure_spi(SPI0_OFFSET);
 	spi_init();
@@ -99,5 +101,9 @@ void main()
 
 	printf("\n After Write");
 	flash_read_locations(read_address, length);
+
+	for(i=0; i<1000; i++){
+	printf("\n  element of an array %x",write_data[i] );
+	}
 	asm volatile ("ebreak");
 }
