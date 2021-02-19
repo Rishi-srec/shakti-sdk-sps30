@@ -363,7 +363,7 @@ FILEPATH:='"$(GENLIB)$(filepath)"'
 
 do1:
 ifeq ($(UPLOAD),UPLOAD)
-	@elf2hex 4 8192 $(filepath)/output/$(PROGRAM).shakti 2147483648 > $(filepath)/output/code.mem
+	@elf2hex 4 1048576 $(filepath)/output/$(PROGRAM).shakti 2147483648 > $(filepath)/output/code.mem
 	@gcc -g -w -D FILEPATH='"$(FILEPATH)"' $(UPLOADDIR)/elf_to_header.c -o $(filepath)/output/elf_to_header
 	@$(filepath)/output/elf_to_header
 	@riscv$(XLEN)-unknown-elf-gcc -w $(DC) -mcmodel=medany -static -std=gnu99 -fno-builtin-printf $(FLAGS) -I$(bspboard) -I$(bspinc) -I$(filepath)/output -c $(UPLOADER)/deploy.c -o $(filepath)/output/deploy.o -march=$(MARCH) -mabi=$(MABI) -lm -lgcc

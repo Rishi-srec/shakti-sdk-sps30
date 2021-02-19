@@ -30,6 +30,7 @@
 #include <stdint.h>
 #include "spi.h"
 #include "uart.h"
+#include "gpio.h"
 #include "utils.h"
 #include "flashdata.h"
 
@@ -64,8 +65,9 @@ void main()
 	int read_address  = 0x00b00004;  // read/write from/to this address
 	int data = write_data; //32 bits of data can be written at a time
 	uint16_t length = 11;
-	int i;
+	int i=0;
 
+#if 0
 	configure_spi(SPI0_OFFSET);
 	spi_init();
 
@@ -101,9 +103,18 @@ void main()
 
 	printf("\n After Write");
 	flash_read_locations(read_address, length);
+#endif
 
-	for(i=0; i<1000; i++){
-	printf("\n  element of an array %x",write_data[i] );
+	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00FFFFFF);
+
+	while(1){
+//		write_word(GPIO_DATA_REG, 0x001);
+		write_word(GPIO_DATA_REG, (write_data[i] << 1)| (write_data[i+1] << 2)| 0x000001);
+	asm volatile("nop");
+	asm volatile("nop");
+		write_word(GPIO_DATA_REG, (write_data[i] << 1)| (write_data[i+1] << 2));
+		i+=2;
 	}
-	asm volatile ("ebreak");
+
+	printf("\n  element of an array %x",write_data[i] );
 }
