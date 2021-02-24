@@ -108,12 +108,9 @@ void main()
 	write_word(GPIO_DIRECTION_CNTRL_REG, 0x00FFFFFF);
 
 	while(1){
-//		write_word(GPIO_DATA_REG, 0x001);
-		write_word(GPIO_DATA_REG, (write_data[i] << 1)| (write_data[i+1] << 2)| 0x000001);
-	asm volatile("nop");
-	asm volatile("nop");
 		write_word(GPIO_DATA_REG, (write_data[i] << 1)| (write_data[i+1] << 2));
-		i+=2;
+		write_word(GPIO_DATA_REG, (write_data[i] << 1)| (write_data[i+1] << 2)| 0x000001);
+		i = (i+2)%131072;
 	}
 
 	printf("\n  element of an array %x",write_data[i] );

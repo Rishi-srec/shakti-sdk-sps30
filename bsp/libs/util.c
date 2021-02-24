@@ -228,7 +228,6 @@ void delay_loop(unsigned long cntr1, unsigned long cntr2)
  */
 unsigned long read_word(uint32_t *addr)
 {
-	log_debug("addr = %x data = %x\n", addr, *addr);
 	return *addr;
 }
 
@@ -240,5 +239,4 @@ unsigned long read_word(uint32_t *addr)
 void write_word(uint32_t *addr, unsigned long val)
 {
 	*addr = val;
-	log_debug("addr = %x data = %x\n", addr, *addr);
 }
