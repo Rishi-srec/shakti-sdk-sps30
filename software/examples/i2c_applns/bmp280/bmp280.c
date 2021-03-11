@@ -267,7 +267,7 @@ int main()
 	int timeout;
 	unsigned int tempReadValue = 0;
 	unsigned long delay = 1000;
-	int pressure = 0, temperature = 0;
+	unsigned long pressure = 0, temperature = 0;
 	int len;
 	log_debug("\n\tI2C: BMP280 Temperature Sensor I2C read\n");
 	i2c_init();
