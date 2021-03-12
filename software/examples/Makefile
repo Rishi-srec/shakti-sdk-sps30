@@ -297,7 +297,11 @@ else
 ifeq ($(PROGRAM),default_mode)
 filepath := xadc_applns/default_mode
 else
+ifeq ($(PROGRAM),sspi_full_duplex)
+filepath := sspi_applns/sspi_full_duplex
+else
 	@echo "Entry for $(PROGRAM) not present"
+endif
 endif
 endif
 endif
