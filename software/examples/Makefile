@@ -150,6 +150,9 @@ ifeq ($(PROGRAM),all)
 	cd ./malloc_test && $(MAKE) all TARGET=$(TARGET)
 	cd ./xadc_applns && $(MAKE) all TARGET=$(TARGET)
 else
+ifeq ($(PROGRAM),loopback)
+filepath := uart_applns/loopback
+else
 ifeq ($(PROGRAM),hello)
 filepath := uart_applns/hello
 else
@@ -298,6 +301,7 @@ ifeq ($(PROGRAM),default_mode)
 filepath := xadc_applns/default_mode
 else
 	@echo "Entry for $(PROGRAM) not present"
+endif
 endif
 endif
 endif
