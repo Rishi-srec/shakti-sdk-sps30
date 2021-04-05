@@ -151,6 +151,9 @@ ifeq ($(PROGRAM),all)
 	cd ./xadc_applns && $(MAKE) all TARGET=$(TARGET)
 	cd ./eth_test && $(MAKE) all TARGET=$(TARGET)
 else
+ifeq ($(PROGRAM),loopback)
+filepath := uart_applns/loopback
+else
 ifeq ($(PROGRAM),hello)
 filepath := uart_applns/hello
 else
@@ -311,6 +314,7 @@ ifeq ($(PROGRAM),ping_res)
 filepath := eth_test/ping_res
 else
 	@echo "Entry for $(PROGRAM) not present"
+endif
 endif
 endif
 endif
