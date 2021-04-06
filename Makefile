@@ -140,7 +140,7 @@ project:
 .PHONY: upload
 upload:
 	@echo Build and upload $(PROGRAM) on $(TARGET) board
-	cd ./software/examples && $(MAKE) UPLOAD=$(UPLOAD) PROGRAM=$(PROGRAM) TARGET=$(TARGET)
+	cd ./software/projects && $(MAKE) UPLOAD=$(UPLOAD) PROGRAM=$(PROGRAM) TARGET=$(TARGET)
 
 .PHONY: erase
 erase:
